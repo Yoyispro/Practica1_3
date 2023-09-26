@@ -1,6 +1,21 @@
 import pandas as pd
 import numpy as np
 
+def cosine_distances(vector1, vector2):
+    cosine_sim = cosine_similarity(vector1, vector2)
+    cosine_dist = 1 - cosine_sim
+    return cosine_dist
+
+
+def jaccard_distances(vector1, vector2):
+    # Convierte los vectores en conjuntos
+    set1 = set(vector1.toarray()[0])
+    set2 = set(vector2.toarray()[0])
+    
+    # Calcula la distancia de Jaccard como 1 - coeficiente de Jaccard
+    jaccard_dist = 1 - len(set1.intersection(set2)) / len(set1.union(set2))
+    return jaccard_dist
+
 #seleccionar los datos de la base de datos que se ocuparán
 datos_seleccionados = ["Title", "Genres", "Director", "Actor1", "Actor2", "Actor3"]
 
