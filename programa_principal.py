@@ -13,5 +13,15 @@ vectores_bolsa = [np.array(vector) for vector in vectores_bolsa]  # Convierte ca
 # Obtener los índices de las entradas más similares
 top_indices = np.argsort(similarity_scores, axis=1)[:, -5:]
 
-# Obtener las 5 mejores recomendaciones
-top_recommendations = df.iloc[top_indices[0]]
+# Encuentra los índices de las películas con las menores distancias (las más similares)
+top_cosine_indices = np.argsort(cosine_distances)[0][:5]
+top_jaccard_indices = np.argsort(jaccard_distances)[0][:5]
+
+top_cosine_recommendations = data.iloc[top_cosine_indices]['Title']
+top_jaccard_recommendations = data.iloc[top_jaccard_indices]['Title']
+
+print("Recomendaciones basadas en similitud de coseno:")
+print(top_cosine_recommendations)
+
+print("\nRecomendaciones basadas en similitud de Jaccard:")
+print(top_jaccard_recommendations)
